@@ -1,7 +1,7 @@
 from aeroport import LegiTarsasag, JegyFoglalas, BelfoldiJarat, NemzetkoziJarat
 from datetime import datetime
 
-ADMIN_PASSWORD = "szeretemacsokit"
+ADMIN_PASSWORD = "admin"
 
 def admin_menu(foglalas_rendszer, wizzair):
     while True:
@@ -12,7 +12,7 @@ def admin_menu(foglalas_rendszer, wizzair):
 
         choice = input("> ").strip()
 
-        if choice == "1":  # Add new flight
+        if choice == "1":  # Adjon hozzá uj járatot
             print("\nÚj járat hozzáadása\n------------------")
             try:
                 jaratszam = input("Járatszám: ").strip()
@@ -31,7 +31,7 @@ def admin_menu(foglalas_rendszer, wizzair):
             except Exception as e:
                 print(f"Hiba történt: {e}")
 
-        elif choice == "2":  # View reservations
+        elif choice == "2":  # Foglalások megtekintése
             print("\nFoglalások megtekintése\n----------------------")
             if not foglalas_rendszer.foglalasok:
                 print("Nincsenek aktív foglalások.")
@@ -44,7 +44,7 @@ def admin_menu(foglalas_rendszer, wizzair):
                           f"Indulási állomás: {jarat.indulasi_allomas}, Célállomás: {jarat.celallomas}, "
                           f"Indulás: {jarat.indulasi_idopont.strftime('%Y-%m-%d %H:%M')}, Jegyár: {jarat.jegyar} Ft")
 
-        elif choice == "3":  # Return to main menu
+        elif choice == "3":  # Vissza a főmenühöz
             break
         else:
             print("Hiba: Kérjük, válasszon érvényes lehetőséget (1, 2 vagy 3).")
@@ -62,7 +62,7 @@ def passenger_menu(foglalas_rendszer, wizzair):
 
         choice = input("> ").strip()
 
-        if choice == "1":  # Make a reservation
+        if choice == "1":  # Foglalás végrehajtása
             print("\nFoglalás készítése\n------------------")
 
             current_time = datetime.now()
@@ -89,7 +89,7 @@ def passenger_menu(foglalas_rendszer, wizzair):
 
             foglalas_rendszer.foglalas(jarat, utas_nev)
 
-        elif choice == "2":  # Cancel a reservation
+        elif choice == "2":  # Foglallás lemondása
             print("\nFoglalás lemondása\n-----------------")
             if not foglalas_rendszer.foglalasok:
                 print("Nincsenek foglalások, amelyeket le lehetne mondani.")
@@ -112,7 +112,7 @@ def passenger_menu(foglalas_rendszer, wizzair):
             except ValueError:
                 print("Hiba: Kérjük, adjon meg egy érvényes számot.")
 
-        elif choice == "3":  # View reservations
+        elif choice == "3":  # Foglalások megtekintése
             print("\nFoglalások megtekintése\n----------------------")
             if not foglalas_rendszer.foglalasok:
                 print("Nincsenek aktív foglalások.")
@@ -125,7 +125,7 @@ def passenger_menu(foglalas_rendszer, wizzair):
                           f"Indulási állomás: {jarat.indulasi_allomas}, Célállomás: {jarat.celallomas}, "
                           f"Indulás: {jarat.indulasi_idopont.strftime('%Y-%m-%d %H:%M')}, Jegyár: {jarat.jegyar} Ft")
 
-        elif choice == "4":  # Return to main menu
+        elif choice == "4":  # Vissza a főmenühöz
             break
         else:
             print("Hiba: Kérjük, válasszon érvényes lehetőséget (1, 2, 3 vagy 4).")
@@ -183,6 +183,6 @@ def start_terminal_interface():
             print("Hiba: Kérjük, válasszon érvényes lehetőséget (1, 2 vagy 3).")
 
 
-# Start the CLI
+# CLI inditása
 if __name__ == "__main__":
     start_terminal_interface()
